@@ -23,8 +23,8 @@ play(Player):- write('New turn for:'), writeln(Player),
 
 
 %Pour tester, on joue x et o :
-chooseMove(_, Move, x) :-writeln("Entrez l'indice de la colonne dans laquelle vous souhaitez jouer :"),read(M2), Move is M2-1.
-%chooseMove(_, Move, Player) :-writeln("Entrez l'indice de la colonne dans laquelle vous souhaitez jouer :"),read(M2), Move is M2-1.
+chooseMove(_, Move, x) :-repeat,writeln("Entrez l'indice de la colonne dans laquelle vous souhaitez jouer :"),read(M2), Move is M2-1,Move<7,Move>=0.
+
 %% Ligne au dessus à commenter/dé-commenter
 
 %chooseMove(Board,Move,o).%:-repeat, Move is random(6), nth0(Move, Board, Elem), var(Elem), !.
