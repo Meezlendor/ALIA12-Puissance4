@@ -43,3 +43,13 @@ testAjoutPiece:- testAjoutPieceCol(0), testAjoutPieceCol(1),
     			  testAjoutPieceCol(6), not(testAjoutPieceCol(7)),
     			  not(testAjoutPieceCol(-1)),!.
 testAjoutPieceCol(Col):- length(Board,42), assert(board(Board)),playMove(Board,Col,_,_).
+
+testHauteurJeton :- testHauteurJeton1, testHauteurJeton2, testHauteurJeton3.
+testHauteurJeton1 :- length(Board,42),assert(board(Board)),
+                     nth0(25,Board,x),nth0(32,Board,x),nth0(39,Board,x),
+                     hauteurJeton(4,Board,H),H is 3.
+testHauteurJeton2 :- length(Board,42),assert(board(Board)),
+                     nth0(3,Board,x),
+                     hauteurJeton(3,Board,H),H is 0.
+testHauteurJeton3 :- length(Board,42),assert(board(Board)),
+                     hauteurJeton(4,Board,H),H is 6.

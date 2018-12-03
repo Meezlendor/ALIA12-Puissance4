@@ -86,8 +86,9 @@ valeurDistance(4,5).
 valeurDistance(X,0):-X<2.
 valeurDistance(X,0):-X>4.
 evaluerDistance(_,_,[],0).
-evaluerDistance(Player,D,[X|L],V):-not(var(X)),X==Player,D2 is D+1,evaluerDistance(Player,D2,L,V2),valeurDistance(D,V3), V is V2+V3.
-evaluerDistance(Player,D,[X|L],V):-(   var(X);not(var(X)),X\==Player),D2 is D+1, evaluerDistance(Player,D2,L,V).
+evaluerDistance(Player,D,[X|L],V):-D<4,not(var(X)),X==Player,D2 is D+1,evaluerDistance(Player,D2,L,V2),valeurDistance(D,V3), V is V2+V3.
+evaluerDistance(Player,D,[X|L],V):-D<4,(var(X);not(var(X)),X\==Player),D2 is D+1, evaluerDistance(Player,D2,L,V).
+evaluerDistance(_,4,_,0).
 evaluerDistanceLigne(_,_,[],0).
 evaluerDistanceLigne(Player,M,L,V):-separerLigne(M,L,LG,LD),reverse(LG,GL),evaluerDistance(Player,1,GL,VG),evaluerDistance(Player,1,LD,VD), V is VG +VD.
 %Test distance : length(A,7),nth0(0,A,x),nth0(1,A,x),nth0(2,A,x),nth0(3,A,x),nth0(4,A,x),nth0(5,A,x),nth0(6,A,x),trace,evaluerDistance(x,0,A,V).
