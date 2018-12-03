@@ -29,7 +29,7 @@ chooseMove(_, Move, x) :-repeat,writeln("Entrez l'indice de la colonne dans laqu
 
 %chooseMove(Board,Move,o).%:-repeat, Move is random(6), nth0(Move, Board, Elem), var(Elem), !.
 %chooseMove(Board,Move,o):-minimax(3,Board,-1,Move,_).
-chooseMove(Board,Move,o):-alphaBeta(4,Board,-10000,10000, -1,Move,_).
+%chooseMove(Board,Move,o):-alphaBeta(4,Board,-10000,10000, -1,Move,_).
 positionInBoard(_,[],Move,Move).
 positionInBoard(_,Board,Move,Move) :-nth0(Move,Board,Val),not(var(Val)),not(nth0(Move,Board,?)),!.
 positionInBoard(Player,[_,_,_,_,_,_,_|Board],Move,Index):-positionInBoard(Player,Board,Move,I2),Index is I2+7.
@@ -55,7 +55,7 @@ changePlayer('o','x').
 
 %%%% Print the value of the board at index N:
 % if its a variable, print ? and x or o otherwise.
-printVal(N) :- board(B), nth0(N,B,Val), var(Val), write('•'), !.
+printVal(N) :- board(B), nth0(N,B,Val), var(Val), write('_'), !.
 printVal(N) :- board(B), nth0(N,B,Val), write(Val).
 
 %%%% Display the board

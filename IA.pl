@@ -12,27 +12,30 @@ value(Board, Move, o, V):-Player='o',
     
 value(Board, Move, x, V):-Player='x',
    positionHorizontale(Player,Move,Board,V1),positionVerticale(Player,Move,Board,V2),positionDiagonale(Player,Move,Board,V3),
-    V is (V1+V2+V3)/2.
+    V is V1+V2+V3.
 
+value(Board,5000):-
+    not((not(positionHorizontale(_,_,Board,1000)),not(positionVerticale(_,_,Board,1000)),not(positionDiagonale(_,_,Board,1000)))).
 value(Board,V):-
     findall(V,(member(Move,[0,1,2,3,4,5,6]),value(Board,Move,o,V)),Values1),
     sommeListe(Values1,Vo),
     findall(V,(member(Move,[0,1,2,3,4,5,6]),value(Board,Move,x,V)),Values2),
     sommeListe(Values2,Vx),
-    V is Vo+Vx.
+    V is Vo+Vx*5.
 sommeListe([X],X).
 sommeListe([X|L],V):-sommeListe(L,V2), V is V2+X.
 
 %Algo minmax
 
-minimax(0,Board, _,_,Value):-
-    value(Board,Value).
+minimax(0,Board, Flag,_,Value):-
+    value(Board,Val),
+    Value is Flag*Val.
 minimax(Depth, Board, Flag, Move, Value):-
     Depth>0,
     playMove(Moves, Board), %define move
     DepthRecur is Depth-1,
     OtherFlag is -1*Flag,
-    evaluateAndChoose(Moves, Board, DepthRecur, OtherFlag, (nil, -10000), (Move,Value)).
+    evaluateAndChoose(Moves, Board, DepthRecur, OtherFlag, (nil, -100000), (Move,Value)).
 
 evaluateAndChoose([],_,_,_,Record,Record).
 evaluateAndChoose([Move|Moves], Board, Depth,Flag, Record, BestMoves):-
@@ -49,7 +52,7 @@ update(Move, Value, (_, Value1), (Move, Value)):-Value > Value1.
 
 %Algo alphabeta
 
-alphaBeta(0,Board,_,_,_,_,Value):-value(Board,Value).
+alphaBeta(0,Board,_,_,Flag,_,Value):-value(Board,Val), Value is Val*Flag.
 alphaBeta(D,Board,Alpha,Beta,Flag, Move,Value):-
     playMove(Moves,Board),
     Alpha1 is -Beta,
