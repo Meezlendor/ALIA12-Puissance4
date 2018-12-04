@@ -53,3 +53,29 @@ testHauteurJeton2 :- length(Board,42),assert(board(Board)),
                      hauteurJeton(3,Board,H),H is 0.
 testHauteurJeton3 :- length(Board,42),assert(board(Board)),
                      hauteurJeton(4,Board,H),H is 6.
+					 
+					 
+%test
+length(Board,42),nth0(3,Board,x),nth0(7,Board,x),nth0(9,Board,x),nth0(15,Board,x),nth0(21,Board,o),nth0(23,Board,o),nth0(31,Board,x),nth0(39,Board,x),blocageDiagonale(x,1,Board,V).
+
+%Test distance Verticale :
+length(A,42),nth0(7,A,x),nth0(14,A,x),nth0(21,A,o),nth0(28,A,x),nth0(35,A,x),distanceVerticale(x,0,A,V).
+%Test de valuation :
+length(A,7),nth0(0,A,x),nth0(1,A,x),nth0(2,A,x),nth0(3,A,x),nth0(4,A,x),nth0(5,A,x),nth0(6,A,x),evaluerDistanceLigne(x,6,A,V).
+%Test distance :
+length(A,7),nth0(0,A,x),nth0(1,A,x),nth0(2,A,x),nth0(3,A,x),nth0(4,A,x),nth0(5,A,x),nth0(6,A,x),trace,evaluerDistance(x,0,A,V).
+%Test de valuation :
+length(A,7),nth0(0,A,x),nth0(1,A,x),nth0(2,A,x),nth0(3,A,x),nth0(4,A,x),nth0(5,A,x),nth0(6,A,x),evaluerDistanceLigne(x,6,A,V).
+
+%Test diagonale
+length(Board,42),nth0(21,Board,x),nth0(15,Board,x),nth0(9,Board,x),nth0(3,Board,x),nth0(29,Board,x),nth0(37,Board,x),positionDiagonale(x,0,Board,V). %V=1000
+length(Board,42),nth0(22,Board,x),nth0(14,Board,x),nth0(30,Board,x),nth0(38,Board,x),nth0(16,Board,x),nth0(10,Board,x),nth0(4,Board,x),positionDiagonale(x,1,Board,V). %V=2000
+length(Board,42),nth0(23,Board,x),nth0(17,Board,x),nth0(15,Board,x),nth0(31,Board,x),positionDiagonale(x,2,Board,V).%V=110
+length(Board,42),nth0(24,Board,x),nth0(30,Board,x),nth0(32,Board,x),trace,positionDiagonale(x,3,Board,V).%V=20
+length(Board,42),nth0(18,Board,x),nth0(24,Board,x),nth0(12,Board,x),nth0(6,Board,x),nth0(10,Board,x),positionDiagonale(x,4,Board,V). %V=1010
+length(Board,42),nth0(19,Board,x),nth0(11,Board,x),nth0(3,Board,x),trace,positionDiagonale(x,5,Board,V).%V=100
+length(Board,42),nth0(27,Board,x),nth0(19,Board,x),nth0(11,Board,x),trace,positionDiagonale(x,6,Board,V).%V=100
+%Test vertical
+length(Board,35),nth0(0,Board,x),nth0(7,Board,x),nth0(14,Board,x),nth0(21,Board,o),nth0(28,Board,x),trace,positionVerticale(x,M,Board,V).
+% Test positionHorizontale
+length(Board,35),nth0(28,Board,x),nth0(29,Board,x),nth0(30,Board,x),nth0(31,Board,x),trace,positionHorizontale(x,M,Board,V).

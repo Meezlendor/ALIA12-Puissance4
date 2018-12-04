@@ -22,14 +22,8 @@ play(Player):- write('New turn for:'), writeln(Player),
             play(NextPlayer). % next turn
 
 
-%Pour tester, on joue x et o :
 chooseMove(_, Move, x) :-repeat,writeln("Entrez l'indice de la colonne dans laquelle vous souhaitez jouer :"),read(M2), Move is M2-1,Move<7,Move>=0.
 
-%% Ligne au dessus à commenter/dé-commenter
-
-%chooseMove(Board,Move,o).%:-repeat, Move is random(6), nth0(Move, Board, Elem), var(Elem), !.
-%chooseMove(Board,Move,o):-minimax(3,Board,-1,Move,_).
-%chooseMove(Board,Move,o):-alphaBeta(4,Board,-10000,10000, -1,Move,_).
 positionInBoard(_,[],Move,Move).
 positionInBoard(_,Board,Move,Move) :-nth0(Move,Board,Val),not(var(Val)),not(nth0(Move,Board,?)),!.
 positionInBoard(Player,[_,_,_,_,_,_,_|Board],Move,Index):-positionInBoard(Player,Board,Move,I2),Index is I2+7.
@@ -39,6 +33,7 @@ buildNewBoard([X|Board],I,NewBoard,Player):-I\==0, I2 is I-1, buildNewBoard(Boar
 
 %%%% Play a Move, the new Board will be the same, but one value will be instanciated with the Move
 playMove(Board,Move,NewBoard,Player) :-
+	-1<Move, Move<7,
     positionInBoard(Player,Board,Move,I2),
     Index is I2-7,
     Index>=0,
